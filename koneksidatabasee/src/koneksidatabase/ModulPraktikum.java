@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 class ModelPraktikum {
     //mengkoneksikan ke database. model berisi query2
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://localhost/praktikum";//nama database
+    static final String DB_URL = "jdbc:mysql://localhost/praktikum?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";//nama database
     static final String USER = "root";
     static final String PASS = "";
     Connection koneksi;
@@ -35,6 +35,20 @@ class ModelPraktikum {
             statement.executeUpdate(query); //excecute query nya
             System.out.println("Berhasil Ditambahkan");
             JOptionPane.showMessageDialog(null, "Data Berhasil Ditambah");
+
+        }catch(Exception sql){
+            System.out.println(sql.getMessage());
+            JOptionPane.showMessageDialog(null, sql.getMessage());
+        }
+    }
+
+    public void updateMahasiswa(String nim, String nama, String alamat){
+        try{
+            String query = "UPDATE `mahasiswa` SET `nama`='"+nama+"',`alamat`='"+alamat+"' WHERE `nim`='"+nim+"'";
+            statement = (Statement) koneksi.createStatement();
+            statement.executeUpdate(query); //excecute query nya
+            System.out.println("Berhasil Diupdate");
+            JOptionPane.showMessageDialog(null, "Data Berhasil Diupdate");
 
         }catch(Exception sql){
             System.out.println(sql.getMessage());
