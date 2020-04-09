@@ -47,21 +47,36 @@ public class ControllerPraktikum {
             }
         });
 
-        viewPraktikum.tabel.addMouseListener(new MouseAdapter() {
+        viewPraktikum.btnUpdatePanel.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) { //alt+insert
-                int baris = viewPraktikum.tabel.getSelectedRow();
-                int kolom = viewPraktikum.tabel.getSelectedColumn(); //ga kepake
-                //ngambil nim yang ada di kolom indeks 0
-                String dataterpilih = viewPraktikum.tabel.getValueAt(baris, 0).toString();
-                System.out.println(dataterpilih);
-                //konfirmasi untuk menghapus
-                int input = JOptionPane.showConfirmDialog(null,
-                        "Apa anda ingin menghapus NIM "+ dataterpilih+ "?", "Pilih Opsi...",JOptionPane.YES_NO_CANCEL_OPTION);
+            public void actionPerformed(ActionEvent e) {
+                if (viewPraktikum.getNim().equals("")
+                        || viewPraktikum.getNama().equals("")
+                        || viewPraktikum.getAlamat().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Field tidak boleh kosong");
+                } else {
+                    String nim = viewPraktikum.getNim();
+                    String nama = viewPraktikum.getNama();
+                    String alamat = viewPraktikum.getAlamat();
+                    modelPraktikum.updateMahasiswa(nim, nama, alamat);
+                    viewPraktikum.tfNim.setText("");
+                    viewPraktikum.tfNamaMhs.setText("");
+                    viewPraktikum.tfAlamatMhs.setText("");
+                    String dataMahasiswa[][] = modelPraktikum.readMahasiswa();
+                    viewPraktikum.tabel.setModel(new JTable(dataMahasiswa, viewPraktikum.namaKolom).getModel());
+                }
+            }
+        });
+
+        viewPraktikum.btnHapusPanel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                viewPraktikum.tfNimdel.getText();
+                 int input = JOptionPane.showConfirmDialog(null,
+                        "Apa anda ingin menghapus NIM "+  viewPraktikum.tfNimdel.getText()+ "?", "Pilih Opsi...",JOptionPane.YES_NO_CANCEL_OPTION);
 
                 if(input==0){
-                    modelPraktikum.deleteMahasiswa(dataterpilih); //mengambil method hapus di model
-                    //untuk menampilkan output langsung tanpa reload
+                    modelPraktikum.deleteMahasiswa( viewPraktikum.tfNimdel.getText()); //mengambil method hapus di model
                     String dataMahasiswa[][] = modelPraktikum.readMahasiswa();
                     viewPraktikum.tabel.setModel(new JTable(dataMahasiswa, viewPraktikum.namaKolom).getModel());
                 }else{
