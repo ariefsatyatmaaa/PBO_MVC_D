@@ -15,7 +15,10 @@ public class ViewPraktikum extends JFrame {
     JTextField tfAlamatMhs = new JTextField();
     JButton btnTambahPanel = new JButton("Tambah");
     JButton btnBatalPanel = new JButton("Batal");
-    JButton btnEditPanel = new JButton("Edit");
+    JButton btnUpdatePanel = new JButton("Update");
+    JTextField tfNimdel = new JTextField();
+    JLabel lNimdel = new JLabel("NIM yg di hps :");
+    JButton btnHapusPanel = new JButton("Hapus");
     JTable tabel;
     DefaultTableModel tableModel; //otomatis dibuat kalo buat JTable
     JScrollPane scrollPane;
@@ -29,7 +32,7 @@ public class ViewPraktikum extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
         setLayout(null);
-        setSize(600, 500);
+        setSize(600, 550);
 
         add(lNim);
         lNim.setBounds(5, 5, 90, 20);
@@ -44,13 +47,21 @@ public class ViewPraktikum extends JFrame {
         add(tfAlamatMhs);
         tfAlamatMhs.setBounds(110, 55, 120, 20);
         add(btnTambahPanel);
-        btnTambahPanel.setBounds(20, 105, 90, 20);
+        btnTambahPanel.setBounds(20, 90, 90, 20);
         add(btnBatalPanel);
-        btnBatalPanel.setBounds(130, 105, 90, 20);
+        btnBatalPanel.setBounds(120, 90, 90, 20);
+        add(btnUpdatePanel);
+        btnUpdatePanel.setBounds(220, 90, 90, 20);
+        add(lNimdel);
+        lNimdel.setBounds(5, 120, 90, 20);
+        add(tfNimdel);
+        tfNimdel.setBounds(110, 120, 120, 20);
+        add(btnHapusPanel);
+        btnHapusPanel.setBounds(20, 160, 90, 20);
 
         //TABEL
         add(scrollPane);
-        scrollPane.setBounds(20, 145, 480, 300);
+        scrollPane.setBounds(30, 190, 480, 300);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         //scrollpane-nya vertikal
     }
